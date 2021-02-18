@@ -1,16 +1,15 @@
-#pip install pycryptodome
+#pip install pycryptodomex
 from Cryptodome.Cipher import AES
 from base64 import b64encode, b64decode
 
-key = b'dgseo123456dgseo'
 
 class AESCrypto:
 
-    def init(self):
-        pass
+    def __init__(self):
+        self.key = b'dgseo123456dgseo'
 
     def Encrypt(self, data):
-        aes = AES.new(key, AES.MODE_EAX)
+        aes = AES.new(self.key, AES.MODE_EAX)
         nonce = aes.nonce
         encdata, tag = aes.encrypt_and_digest(data.encode())
         return b64encode(encdata), b64encode(tag), b64encode(nonce)
@@ -20,7 +19,7 @@ class AESCrypto:
         tag = b64decode(tag)
         nonce = b64decode(nonce)
 
-        aes = AES.new(key, AES.MODE_EAX, nonce)
+        aes = AES.new(self.key, AES.MODE_EAX, nonce)
         decdata = aes.decrypt_and_verify(encdata, tag)
         return decdata.decode('utf-8')
 
