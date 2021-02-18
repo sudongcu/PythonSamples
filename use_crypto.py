@@ -7,5 +7,5 @@ a = AESCrypto()
 encdata = a.Encrypt(testdata)
 print(encdata)
 
-decdata = a.Decrypt(testdata)
+decdata = a.Decrypt(encdata[0], encdata[1], encdata[2])
 print(decdata)
